@@ -15,7 +15,7 @@ base_rounding = 8;
 
 pilot_diameter = 0.866*mm_per_inch;
 bolt_hole_distance = 1.220*mm_per_inch;
-bolt_hole_size = 3.5;
+bolt_hole_size = 4.2;
 
 module base() {
 	difference() {
