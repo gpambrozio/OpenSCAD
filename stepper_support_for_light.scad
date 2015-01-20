@@ -12,6 +12,7 @@ center_offset = 24;
 arm_width = support_width + 2 * base_thickness;
 support_hole = 5;
 base_rounding = 8;
+rounding = 2;
 
 pilot_diameter = 0.866*mm_per_inch;
 bolt_hole_distance = 1.220*mm_per_inch;
@@ -27,6 +28,11 @@ module base() {
 			}
 		}
 		translate([-motor_width/2,0,0]) cube([motor_width, pilot_diameter, base_thickness+2], center=true);
+		translate([-motor_width/2,-motor_width/2,0]) rotate([0,0,0]) round_side(rounding, base_thickness+2);
+		translate([-motor_width/2,motor_width/2,0]) rotate([0,0,-90]) round_side(rounding, base_thickness+2);
+
+		translate([-motor_width/2,pilot_diameter/2,0]) rotate([0,0,0]) round_side(rounding, base_thickness+2);
+		translate([-motor_width/2,-pilot_diameter/2,0]) rotate([0,0,-90]) round_side(rounding, base_thickness+2);
 	}
 }
 
