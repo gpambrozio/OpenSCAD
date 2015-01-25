@@ -5,7 +5,7 @@ $fs=0.5; // default minimum facet size is now 0.5 mm
 
 base_width = 30;
 base_thickness = 12;
-tool_diameter = 14;
+tool_diameter = 15.4;
 rounding = 3;
 slit = 8.5;
 clamp_width = 5;
@@ -17,6 +17,7 @@ support_height = 93;
 support_holes = 4;
 support_offset = 55;
 support_rounding = 20;
+holes_offsets = [0, 46.55, 74.05];
 
 module round(r, h, negative = false) {
 	translate([-r, -r, 0])
@@ -74,7 +75,7 @@ module support() {
 				translate([0,-support_offset/2,-(support_height-base_thickness)/2]) rotate([0,0,90]) rotate([90,0,0]) rounded_cube(support_offset, base_thickness, support_thickness, rounding);
 			}
 			translate([0,0,(-support_height+base_thickness)*3/2])
-			for (offset=[0,46.55,74.05]) {
+			for (offset=holes_offsets) {
 				translate([0,0,offset]) rotate([0,90,0]) cylinder(d=support_holes, h = support_thickness + 2, center=true);
 			}
 		}
