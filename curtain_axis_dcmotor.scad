@@ -8,8 +8,8 @@ lips_width = 1.8;
 inside_diameter = 22;
 height = 17;
 head_height = 3;
-shaft_diameter = 6.2;
-shaft_notch = 2.5;
+shaft_diameter = 6.5;
+shaft_notch = 2.6;
 shaft_height = 11;
 
 sensor_notch = 2;
