@@ -3,10 +3,10 @@ $fa=1;
 
 servo_l = 24;
 servo_w = 13;
-servo_h = 21;
+servo_h = 24;
 
 bolt_hole_diameter = 4.5;
-servo_axis_diameter = 4;
+servo_axis_diameter = 4.8;
 
 magnet_hole_l = 10.5;
 magnet_hole_w = 6.5;
@@ -20,7 +20,7 @@ base_h = 3;
 base_joint_space = 0.7;
 base_joint_height = 26;
 
-arm_h = 5;
+arm_h = 4.5;
 arm_w = 5;
 arm_l = 50;
 
@@ -72,9 +72,9 @@ module base() {
 				translate([0,1,base_joint_height]) rotate(a=90, v=[1,0,0]) cylinder(r=bolt_hole_diameter/2, h=10);
 			}
 		}
-		translate([-servo_w/2,-servo_h/2,8]) {
+		translate([-servo_w/2,-servo_h/2+3.8,8]) {
 			cube([servo_w,servo_h,servo_l]);
-			translate([0,3.5,-4]) cube([12,3,6]);
+			translate([0,2.5,-4]) cube([servo_w,3,6]);
 		}
 	}
 }
@@ -96,7 +96,7 @@ module arm(hole1, hole2) {
 module pen_arm() {
 	arm(bolt_hole_diameter, bolt_hole_diameter);
 	rotate(a=45,v=[0,0,1])
-	translate([-arm_w/2-pen_diameter/2-bolt_hole_diameter/2,0])
+	translate([-arm_w/2-pen_diameter/2-bolt_hole_diameter/2,0,0])
 	difference() {
 		arm_ring(pen_diameter, pen_diameter + arm_w);
 		translate([-pen_diameter/2,0,-1]) cylinder(r=pen_diameter/2,h=arm_h+2);
@@ -114,10 +114,10 @@ module eraser() {
 	ring(eraser_magnet_diameter, eraser_magnet_diameter + 2.5, 8);
 }
 
-//color("yellow") translate([-50,0,0]) base();
-color("red") translate([0,0,4]) servoholder();
+//color("red") translate([-50,0,0]) base();
+//color("red") translate([0,0,4]) servoholder();
 //color("green") translate([40, 30, 0]) arm(servo_axis_diameter, bolt_hole_diameter);
 //color("green") translate([40, 10, 0]) arm(servo_axis_diameter, bolt_hole_diameter);
 //color("green") translate([40, -10, 0]) arm(bolt_hole_diameter, bolt_hole_diameter);
-//color("green") translate([40, -30, 0]) pen_arm();
+color("green") translate([40, -30, 0]) pen_arm();
 //color("blue") translate([60, 60, 0]) eraser();
