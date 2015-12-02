@@ -12,18 +12,38 @@ testing_length = 75;
 
 for_printing = true;
 
-if (for_printing) {
-    main(for_printing);
-    translate([-external_d/2, -support_d/8, external_d/2]) support(for_printing);
-} else {
-    main(for_printing);
-    translate([0, -external_d/2, -support_d/2 + height])
-    rotate([90,0,0])
-    rotate([0,-90,0])
-    support(for_printing);
+//main();
+hose_support();
+
+module hose_support() {
+    rotate([0,90,0])
+    translate([-height/2,0,0])
+    difference() {
+        union() {
+            translate([0, 0, external_d/2]) cube([height, external_d, external_d], center=true);
+            translate([0,external_d/2,external_d/2]) rotate([0,90,0]) cylinder(h=height, d=external_d, center=true);
+        }
+        translate([0,external_d/2,external_d/2]) rotate([0,90,0]) cylinder(h=height+2, d=internal_d_upper, center=true);
+        translate([-height/2-1,external_d/2-internal_d_upper/2,external_d/2]) cube([height+2, external_d/2, external_d], center=false);
+        translate([0,external_d-internal_d_upper/2,external_d+7]) cube([height+2, external_d, external_d], center=true);
+    }
 }
 
-module main(for_printing) {
+module main() {
+    if (for_printing) {
+        support(for_printing);
+        translate([-external_d/2, -support_d/8, external_d/2]) 
+        arm(for_printing);
+    } else {
+        support(for_printing);
+        translate([0, -external_d/2, -support_d/2 + height])
+        rotate([90,0,0])
+        rotate([0,-90,0])
+        arm(for_printing);
+    }
+}
+
+module support(for_printing) {
     difference() {
         union() {
             cylinder(h=height, d=external_d);
@@ -37,7 +57,7 @@ module main(for_printing) {
     }
 }
 
-module support(for_printing) {
+module arm(for_printing) {
     difference() {
         cylinder(h=external_d, d = support_d, center=true);
         cylinder(h=external_d+2, d = support_d - height * 2, center=true);
