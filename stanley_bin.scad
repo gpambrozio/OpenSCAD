@@ -17,7 +17,10 @@ case_height = 20; // [41:Shallow, 46.2:Deep]
 
 skirt_size = 0;  // [0:50]
 
-wall_thickness = 1.1;
+wall_thickness = 1.2;
+
+// Creates 2 separate pieces that can be printed without support but that have to be glued together.
+split_base_and_top = "No"; // [No,Yes]
 
 /* [Hidden] */
 
@@ -30,7 +33,7 @@ single_box_height = 52.25;
 double_box_width = 77.1;
 double_box_height = 107.4;
 
-round_radius = wall_thickness;
+round_radius = wall_thickness / 2;
 
 feet_height = 2.8;
 feet_size = 6;
@@ -54,6 +57,24 @@ horizontal_spacing = (internal_height - (wall_thickness * horizontal_dividers)) 
 
 echo("W=", final_width, " H=", final_height, " vs=", vertical_spacing, " hs=", horizontal_spacing);
 
+if (split_base_and_top == "Yes") {
+    translate([0, final_height / 2 + 5, - feet_height - round_radius])
+    difference() {
+        box();
+        translate([0, 0, - case_height/2 - 1 + feet_height + round_radius]) cube([final_width + 2, final_height + 2, case_height + 2], center = true);
+    }
+
+    translate([0, -final_height / 2 - 5, 0])
+    rotate([0, 180, 0])
+    translate([0, 0, -feet_height - round_radius])
+    difference() {
+        box();
+        translate([0, 0, feet_height + case_height / 2 + 1 + round_radius]) cube([final_width + 2, final_height + 2, case_height + 2], center = true);
+    }
+} else {
+    box();
+}
+
 module feet() {
 	translate([0,0,-(feet_height-round_radius)/2])
 	difference() {
@@ -72,30 +93,32 @@ module feet() {
 		}
 	}
 }
-
-union() {
-	difference() {
-		roundedBox([final_width, final_height, case_height], round_radius);
-		translate([0,0,wall_thickness+1]) roundedBox([final_width - 2 * wall_thickness, final_height - 2 * wall_thickness, case_height+2], round_radius/2);
-	}
-	
-	if (vertical_dividers > 0) {
-		translate([-(internal_width - wall_thickness) / 2,0,0])
-		for (i = [1:vertical_dividers]) {
-			#translate([vertical_spacing*i+wall_thickness * (i-1),0,simplify_correction]) cube([wall_thickness, internal_height, case_height-wall_thickness-simplify_correction*2], center = true);
-		}
-	}
-	
-	if (horizontal_dividers > 0) {
-		translate([0,-(internal_height - wall_thickness) / 2,0])
-		for (i = [1:horizontal_dividers]) {
-			#translate([0,horizontal_spacing*i+wall_thickness * (i-1),simplify_correction]) cube([internal_width, wall_thickness, case_height-wall_thickness-simplify_correction*2], center = true);
-		}
-	}
-	
-	for (x=[1, -1]) {
-		for (y=[1, -1]) {
-			translate([x * (final_width - feet_size) / 2 - x * feet_subtract, y * (final_height - feet_size) / 2 - y * feet_subtract, -case_height / 2]) rotate([0,0, (x==1 && y ==1 ? 90 : (x == -1 && y == 1 ? 180 : (x == -1 && y == -1 ? 270 : 0)))]) feet();
-		}
-	}	
+module box() {
+    translate([0, 0, case_height / 2 + feet_height])
+    union() {
+        difference() {
+            roundedBox([final_width, final_height, case_height], round_radius);
+            translate([0,0,wall_thickness]) roundedBox([final_width - 2 * wall_thickness, final_height - 2 * wall_thickness, case_height], round_radius/2);
+        }
+        
+        if (vertical_dividers > 0) {
+            translate([-(internal_width - wall_thickness) / 2,0,0])
+            for (i = [1:vertical_dividers]) {
+                translate([vertical_spacing*i+wall_thickness * (i-1),0,simplify_correction]) cube([wall_thickness, internal_height, case_height-wall_thickness-simplify_correction*2], center = true);
+            }
+        }
+        
+        if (horizontal_dividers > 0) {
+            translate([0,-(internal_height - wall_thickness) / 2,0])
+            for (i = [1:horizontal_dividers]) {
+                translate([0,horizontal_spacing*i+wall_thickness * (i-1),simplify_correction]) cube([internal_width, wall_thickness, case_height-wall_thickness-simplify_correction*2], center = true);
+            }
+        }
+        
+        for (x=[1, -1]) {
+            for (y=[1, -1]) {
+                translate([x * (final_width - feet_size) / 2 - x * feet_subtract, y * (final_height - feet_size) / 2 - y * feet_subtract, -case_height / 2]) rotate([0,0, (x==1 && y ==1 ? 90 : (x == -1 && y == 1 ? 180 : (x == -1 && y == -1 ? 270 : 0)))]) feet();
+            }
+        }	
+    }
 }
