@@ -20,7 +20,7 @@ skirt_size = 0;  // [0:50]
 wall_thickness = 1.2;
 
 // Creates 2 separate pieces that can be printed without support but that have to be glued together.
-split_base_and_top = "Both"; // [As One, Both, Base, Box]
+split_base_and_top = "As One"; // [As One, Both, Base, Box]
 
 /* [Hidden] */
 
