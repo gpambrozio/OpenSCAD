@@ -20,12 +20,14 @@ skirt_size = 0;  // [0:50]
 wall_thickness = 1.2;
 
 // Creates 2 separate pieces that can be printed without support but that have to be glued together.
-split_base_and_top = "No"; // [No,Yes]
+split_base_and_top = "Both"; // [As One, Both, Base, Box]
 
 /* [Hidden] */
 
 $fa=0.5; // default minimum facet angle is now 0.5
 $fs=0.5; // default minimum facet size is now 0.5 mm
+
+split_parts_separation = 10;
 
 single_box_width = 37.1;
 single_box_height = 52.25;
@@ -57,22 +59,45 @@ horizontal_spacing = (internal_height - (wall_thickness * horizontal_dividers)) 
 
 echo("W=", final_width, " H=", final_height, " vs=", vertical_spacing, " hs=", horizontal_spacing);
 
-if (split_base_and_top == "Yes") {
-    translate([0, final_height / 2 + 5, - feet_height - round_radius])
-    difference() {
-        box();
-        translate([0, 0, - case_height/2 - 1 + feet_height + round_radius]) cube([final_width + 2, final_height + 2, case_height + 2], center = true);
-    }
+if (split_base_and_top == "As One") {
+    box();
+} else if (split_base_and_top == "Base") {
+    split_base();
+} else if (split_base_and_top == "Box") {
+    split_box();
+} else {
+    if (final_width > final_height) {
+        translate([0, final_height / 2 + split_parts_separation / 2, 0])
+        split_box();
 
-    translate([0, -final_height / 2 - 5, 0])
+        translate([0, -final_height / 2 - split_parts_separation / 2, 0])
+        split_base();
+    } else {
+        translate([0, final_width / 2 + split_parts_separation / 2, 0])
+        rotate([0, 0, 90])
+        split_box();
+
+        translate([0, -final_width / 2 - split_parts_separation / 2, 0])
+        rotate([0, 0, 90])
+        split_base();
+    }
+}
+
+module split_base() {
     rotate([0, 180, 0])
     translate([0, 0, -feet_height - round_radius])
     difference() {
         box();
         translate([0, 0, feet_height + case_height / 2 + 1 + round_radius]) cube([final_width + 2, final_height + 2, case_height + 2], center = true);
     }
-} else {
-    box();
+}
+
+module split_box() {
+    translate([0, 0, - feet_height - round_radius])
+    difference() {
+        box();
+        translate([0, 0, - case_height/2 - 1 + feet_height + round_radius]) cube([final_width + 2, final_height + 2, case_height + 2], center = true);
+    }
 }
 
 module feet() {
