@@ -55,18 +55,6 @@ module simple_hook() {
   }
 }
 
-module rounded_hook0() {
-  translate([hook_radius+thickness, 0, 0]) union(r=2) {
-    hook_base();
-    translate([thickness+hook_radius, 0, width/2]) rotate([0, 90, 180]) difference() {
-      cylinder(h=thickness, r=width/2);
-      //translate([-width/2, -width/2, 0]) cube([width,width,thickness]);
-      translate([-width-1, .5, -1])
-        cube([2*width+2, width+1, thickness+2]);
-    }
-  }
-}
-
 module rounded_hook() {
   translate([0, -hook_radius-thickness, 0]) difference() {
     intersection() {
