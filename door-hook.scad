@@ -1,3 +1,5 @@
+// From http://www.thingiverse.com/thing:102974
+
 /* [Door parameters] */
 // Door thickness (inner distance between front and back of door hook)
 clip_depth = 44.8;
@@ -30,12 +32,14 @@ clip_angle = 1;
 // Add support buttress on hooks (except last); might help reduce flex, but looks a bit uglier (IMO)
 inner_hook_buttress = 0; // [0:No,1:Yes]
 
+double_sided = 1; // [0:No,1:Yes]
 
 /* [Hidden] */
 
 $fn = 72;
 thickness = hook_and_front_thickness;
 top_thickness = top_and_back_thickness;
+back_thickness = double_sided ? thickness : top_thickness;
 
 module hook_base() {
   difference() {
@@ -77,25 +81,36 @@ module hook() {
 
 module clip() {
   front_length = first_hook_offset + (number_of_hooks - 1) * hook_distance;
+  back_length = double_sided ? front_length : clip_length;
   union() {
-    translate([-clip_depth-top_thickness, 0, 0]) rotate([0, 0, clip_angle]) translate([0, -clip_length, 0])
-      cube([top_thickness, clip_length, width]);
-    translate([-clip_depth-top_thickness, 0, 0])
-      cube([clip_depth + top_thickness + thickness, top_thickness, width]);
+    translate([-clip_depth-back_thickness, 0, 0]) rotate([0, 0, clip_angle]) translate([0, -back_length, 0])
+      cube([back_thickness, back_length, width]);
+    translate([-clip_depth-back_thickness, 0, 0])
+      cube([clip_depth + back_thickness + thickness, top_thickness, width]);
     translate([0, -front_length, 0])
       cube([thickness, front_length, width]);
   }
 }
 
+butt_theta = acos(hook_radius/(hook_radius+thickness));
+module each_hook(i) {
+  translate([0, -first_hook_offset-i*hook_distance+.1, 0]) union() {
+    hook();
+    if ((i < number_of_hooks-1) && (inner_hook_buttress != 0)) {
+      translate([0,-(hook_radius+thickness)*tan(butt_theta),0]) rotate([0, 0, butt_theta]) translate([0, -thickness, 0]) cube([thickness*(1+1/cos(butt_theta)),thickness,width]);
+    }
+  }
+}
+
 module door_hook() {
-  butt_theta = acos(hook_radius/(hook_radius+thickness));
   clip();
   for (i = [0:(number_of_hooks-1)]) {
-    translate([0, -first_hook_offset-i*hook_distance+.1, 0]) union() {
-      hook();
-      if ((i < number_of_hooks-1) && (inner_hook_buttress != 0)) {
-        translate([0,-(hook_radius+thickness)*tan(butt_theta),0]) rotate([0, 0, butt_theta]) translate([0, -thickness, 0]) cube([thickness*(1+1/cos(butt_theta)),thickness,width]);
-      }
+    each_hook(i);
+    if (double_sided) {
+      translate([-clip_depth, 0, width])
+      rotate([0, 0, clip_angle])
+      rotate([0, 180, 0])
+      each_hook(i);
     }
   }
 }
