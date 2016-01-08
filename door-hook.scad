@@ -2,9 +2,9 @@
 
 /* [Door parameters] */
 // Door thickness (inner distance between front and back of door hook)
-clip_depth = 44.8;
+clip_depth = 37;
 // Thickness of top and overhang (make sure it fits gap between door and frame)
-top_and_back_thickness = 2.75;
+top_and_back_thickness = 2;
 
 /* [Hook parameters] */
 // Width of entire hook
@@ -15,7 +15,7 @@ hook_and_front_thickness = 4;
 clip_length = 55;
 
 
-number_of_hooks = 2;
+number_of_hooks = 1;
 // Distance between top of door and first hanger hook
 first_hook_offset = 65;  // rounded: 60
 // Distance between successive hanger hooks (if more than one)
