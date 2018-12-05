@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>409.2</string>
+	<string>428</string>
 	<key>AMApplicationVersion</key>
-	<string>2.5</string>
+	<string>2.7</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -52,7 +52,7 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/Downloads/IMG_4441.png</string>
+						<string>~/Downloads/2016-11-21-PHOTO-00000815.jpg</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -109,7 +109,7 @@
 				<key>location</key>
 				<string>527.000000:112.000000</string>
 				<key>nibPath</key>
-				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/English.lproj/main.nib</string>
+				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
 			<false/>
@@ -214,8 +214,6 @@
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -318,8 +316,6 @@ end run</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -408,8 +404,6 @@ end run</string>
 				</array>
 				<key>OutputUUID</key>
 				<string>9EC0DFC6-9624-4DFB-A50B-A27DCCD2CDC1</string>
-				<key>StartAction</key>
-				<false/>
 				<key>UUID</key>
 				<string>66061F62-C43A-49E5-96BE-4B7497567783</string>
 				<key>UnlocalizedApplications</key>
@@ -432,8 +426,6 @@ end run</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -478,11 +470,9 @@ end run</string>
 				<dict>
 					<key>Container</key>
 					<string>List</string>
-					<key>Optional</key>
-					<true/>
 					<key>Types</key>
 					<array>
-						<string>com.apple.cocoa.string</string>
+						<string>*</string>
 					</array>
 				</dict>
 				<key>AMRequiredResources</key>
@@ -546,8 +536,6 @@ end run</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -607,7 +595,7 @@ end run</string>
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>/opt/local/bin/convert "$1" -type Grayscale -negate -resize 128x128 -depth 8 gray:/Users/gustavo/Downloads/lithoplane.raw</string>
+					<string>/opt/local/bin/convert "$1" -type Grayscale -negate -resize 512x512 -depth 8 gray:/Users/gustavo/Downloads/lithoplane.raw</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -643,8 +631,6 @@ end run</string>
 				</array>
 				<key>OutputUUID</key>
 				<string>5C0E13CA-45E5-43C3-BEFB-086267B9132F</string>
-				<key>StartAction</key>
-				<false/>
 				<key>UUID</key>
 				<string>91B81F3B-4EA0-40D4-9D83-7D4902F14996</string>
 				<key>UnlocalizedApplications</key>
@@ -778,7 +764,7 @@ end run</string>
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>width = 128 # =&gt; width of resized raw image
+					<string>width = 512 # =&gt; width of resized raw image
 str = File.binread('/Users/gustavo/Downloads/lithoplane.raw')
 pixels = str.unpack("C*")
 
@@ -949,11 +935,9 @@ end
 				<dict>
 					<key>Container</key>
 					<string>List</string>
-					<key>Optional</key>
-					<true/>
 					<key>Types</key>
 					<array>
-						<string>com.apple.cocoa.string</string>
+						<string>*</string>
 					</array>
 				</dict>
 				<key>AMRequiredResources</key>
@@ -1017,12 +1001,10 @@ end
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>527.000000:1194.000000</string>
+				<string>527.000000:1142.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -1080,7 +1062,7 @@ end
 					<key>COMMAND_STRING</key>
 					<string>rm -f /Users/gustavo/Downloads/lithoplane.raw
 rm -f /Users/gustavo/Downloads/lithoplane_$1.stl
-/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o /Users/gustavo/Downloads/lithoplane_$1.stl "/Users/gustavo/Dropbox (Personal)/MyDocuments/3DModels/OpenSCAD/my_lithoplane.scad"
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o /Users/gustavo/Downloads/lithoplane_$1.stl "/Users/gustavo/Dropbox (Personal)/MyDocuments/3DModels/OpenSCAD/my_lithophane.scad"
 rm -f /Users/gustavo/Downloads/lithoplane.dat
 open /Users/gustavo/Downloads/lithoplane_$1.stl</string>
 					<key>CheckedForUserDefaultShell</key>
@@ -1106,6 +1088,8 @@ open /Users/gustavo/Downloads/lithoplane_$1.stl</string>
 				</array>
 				<key>Class Name</key>
 				<string>RunShellScriptAction</string>
+				<key>Disabled</key>
+				<false/>
 				<key>InputUUID</key>
 				<string>3F355971-7C96-4CE0-BD60-FC9CBE6E63BB</string>
 				<key>Keywords</key>
@@ -1195,7 +1179,7 @@ open /Users/gustavo/Downloads/lithoplane_$1.stl</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>527.000000:1429.000000</string>
+				<string>527.000000:1325.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -1205,61 +1189,61 @@ open /Users/gustavo/Downloads/lithoplane_$1.stl</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>04D2C0D3-425E-4931-8D9C-494BCF8DB095</key>
+		<key>1FDBA89B-6F19-4281-8B4F-BAA76CABA3E1</key>
+		<dict>
+			<key>from</key>
+			<string>8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE - 8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE</string>
+			<key>to</key>
+			<string>713E273C-0D17-4994-A540-779B157BED81 - 713E273C-0D17-4994-A540-779B157BED81</string>
+		</dict>
+		<key>3086D8B5-817C-4CDB-95E9-76282D1AC4D0</key>
+		<dict>
+			<key>from</key>
+			<string>66061F62-C43A-49E5-96BE-4B7497567783 - 66061F62-C43A-49E5-96BE-4B7497567783</string>
+			<key>to</key>
+			<string>40FCC24B-1265-44AD-AA52-697C758446B5 - 40FCC24B-1265-44AD-AA52-697C758446B5</string>
+		</dict>
+		<key>67B5800F-1E57-4945-82BA-1E2E97C32BF3</key>
+		<dict>
+			<key>from</key>
+			<string>91B81F3B-4EA0-40D4-9D83-7D4902F14996 - 91B81F3B-4EA0-40D4-9D83-7D4902F14996</string>
+			<key>to</key>
+			<string>8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE - 8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE</string>
+		</dict>
+		<key>861A9B4D-DDDB-46DB-9445-EF24C3360771</key>
 		<dict>
 			<key>from</key>
 			<string>EF303449-5BCC-4B8F-B17E-72482BF41A31 - EF303449-5BCC-4B8F-B17E-72482BF41A31</string>
 			<key>to</key>
 			<string>66061F62-C43A-49E5-96BE-4B7497567783 - 66061F62-C43A-49E5-96BE-4B7497567783</string>
 		</dict>
-		<key>075D3CF1-B40E-4C70-AB5C-3EF65CB28249</key>
+		<key>C5CAAC0A-25D9-44E8-B9B5-FD37CBAA802F</key>
 		<dict>
 			<key>from</key>
 			<string>340B3B4D-7801-4024-840C-16C821F8FB6A - 340B3B4D-7801-4024-840C-16C821F8FB6A</string>
 			<key>to</key>
 			<string>EF303449-5BCC-4B8F-B17E-72482BF41A31 - EF303449-5BCC-4B8F-B17E-72482BF41A31</string>
 		</dict>
-		<key>3D2E84CE-B363-4477-96D7-055383D351BC</key>
+		<key>DDA6F053-FDF2-47CF-B9BB-1FD235E825A2</key>
 		<dict>
 			<key>from</key>
-			<string>3766ACA3-5F54-4B80-8305-74AA4D05534B - 3766ACA3-5F54-4B80-8305-74AA4D05534B</string>
+			<string>40FCC24B-1265-44AD-AA52-697C758446B5 - 40FCC24B-1265-44AD-AA52-697C758446B5</string>
 			<key>to</key>
-			<string>340B3B4D-7801-4024-840C-16C821F8FB6A - 340B3B4D-7801-4024-840C-16C821F8FB6A</string>
+			<string>91B81F3B-4EA0-40D4-9D83-7D4902F14996 - 91B81F3B-4EA0-40D4-9D83-7D4902F14996</string>
 		</dict>
-		<key>68DCD32F-9B8C-4803-9613-5C501F7A2076</key>
+		<key>E7BBC6DA-DA15-4E00-84F2-DC70100D2C04</key>
 		<dict>
 			<key>from</key>
 			<string>713E273C-0D17-4994-A540-779B157BED81 - 713E273C-0D17-4994-A540-779B157BED81</string>
 			<key>to</key>
 			<string>6D32FA49-7127-4452-9454-C5C681220E7A - 6D32FA49-7127-4452-9454-C5C681220E7A</string>
 		</dict>
-		<key>6E284974-4809-4D8F-BB4B-662285BBC3A1</key>
+		<key>FC760A7D-09C5-45A5-A8CD-EE736DF57E40</key>
 		<dict>
 			<key>from</key>
-			<string>8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE - 8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE</string>
+			<string>3766ACA3-5F54-4B80-8305-74AA4D05534B - 3766ACA3-5F54-4B80-8305-74AA4D05534B</string>
 			<key>to</key>
-			<string>713E273C-0D17-4994-A540-779B157BED81 - 713E273C-0D17-4994-A540-779B157BED81</string>
-		</dict>
-		<key>9ACB2C74-3664-4600-AC6B-C378B25E9D76</key>
-		<dict>
-			<key>from</key>
-			<string>66061F62-C43A-49E5-96BE-4B7497567783 - 66061F62-C43A-49E5-96BE-4B7497567783</string>
-			<key>to</key>
-			<string>40FCC24B-1265-44AD-AA52-697C758446B5 - 40FCC24B-1265-44AD-AA52-697C758446B5</string>
-		</dict>
-		<key>D8BFDE39-4BF2-4DFC-959D-8521F3FE64CD</key>
-		<dict>
-			<key>from</key>
-			<string>91B81F3B-4EA0-40D4-9D83-7D4902F14996 - 91B81F3B-4EA0-40D4-9D83-7D4902F14996</string>
-			<key>to</key>
-			<string>8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE - 8F7CF7A6-8AEC-465D-9CC5-B7620599C4EE</string>
-		</dict>
-		<key>FBF0B8BC-68FC-447A-B72D-858B6FC7A321</key>
-		<dict>
-			<key>from</key>
-			<string>40FCC24B-1265-44AD-AA52-697C758446B5 - 40FCC24B-1265-44AD-AA52-697C758446B5</string>
-			<key>to</key>
-			<string>91B81F3B-4EA0-40D4-9D83-7D4902F14996 - 91B81F3B-4EA0-40D4-9D83-7D4902F14996</string>
+			<string>340B3B4D-7801-4024-840C-16C821F8FB6A - 340B3B4D-7801-4024-840C-16C821F8FB6A</string>
 		</dict>
 	</dict>
 	<key>variables</key>

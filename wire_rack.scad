@@ -3,14 +3,14 @@
 $fn = 32+1-1;	// Dummy math to avoid showing in customizer.
 
 // Number of tines
-N = 13;			// [2:20]
+N = 18;			// [2:20]
 tine_width = 6;
 tine_height = 4;
 tine_length = 30;
 tine_pitch = 8;
 
 base_height = 20;
-base_width = base_height*2 + (N-1)*(tine_pitch) + tine_width;
+base_width = base_height/2 + (N-1)*(tine_pitch) + tine_width;
 base_thickness = 4;
 
 echo("<b>Base width [mm]:", base_width);
@@ -25,7 +25,7 @@ difference()
 	// Baseplate
 	union()
 	{
-		translate([base_height/2,0,0]) cube([base_width-base_height,base_height,base_thickness]);
+		translate([base_height*3/4,0,0]) cube([base_width,base_height,base_thickness]);
 		//translate([base_height/2,base_height/2,0]) cylinder(base_thickness,base_height/2,base_height/2);
 		//translate([base_width-base_height/2,base_height/2,0]) cylinder(base_thickness,base_height/2,base_height/2);		
 	}

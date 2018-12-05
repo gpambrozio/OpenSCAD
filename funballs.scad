@@ -5,11 +5,11 @@ external_d = 100;
 wall = 1.4;
 border_w = 5;
 border_h = 2.5;
-wire_hole_w = 0;
-wire_hole_h = 0;
+wire_hole_w = 5;
+wire_hole_h = 1;
 
 difference() {
-    union() {    
+    union() {
         difference() {
             sphere(d = external_d);
             sphere(d = external_d - wall * 2);

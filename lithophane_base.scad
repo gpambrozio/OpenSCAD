@@ -19,7 +19,7 @@ center_tube_tickness = 2;
 center_tube_height = 15;
 
 text_depth = 2;
-text = "GG & BB Lith♥phane";
+text = "SonyGus Lith♥phane";
 
 difference() {
     union() {

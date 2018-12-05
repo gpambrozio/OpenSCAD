@@ -18,8 +18,8 @@ pole_d = 26;
 // hidden
 support_inner_d = support_d - height * 2;
 
-//main();
-hose_support();
+main();
+//hose_support();
 
 module hose_support() {
     rotate([0,90,0])
@@ -38,12 +38,13 @@ module hose_support() {
 module main() {
     if (for_printing) {
         support(for_printing);
-        
+
         translate([-external_d/2, -support_d/8, external_d/2]) 
         arm(for_printing);
-
+/*
         translate([0, -external_d - 10, 0])
         pole(for_printing);
+*/
     } else {
         support(for_printing);
         

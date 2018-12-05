@@ -1,5 +1,8 @@
 // From http://www.thingiverse.com/thing:102974
 
+wall_hole_d = 5;
+wall_hole_offset = 10;
+
 /* [Door parameters] */
 // Door thickness (inner distance between front and back of door hook)
 clip_depth = 37;
@@ -17,7 +20,7 @@ clip_length = 55;
 
 number_of_hooks = 1;
 // Distance between top of door and first hanger hook
-first_hook_offset = 65;  // rounded: 60
+first_hook_offset = 35;  // rounded: 60
 // Distance between successive hanger hooks (if more than one)
 hook_distance = 60;  // rounded: 60
 // Radius of hanger hook curve
@@ -115,4 +118,20 @@ module door_hook() {
   }
 }
 
-door_hook();
+module wall_hook() {
+  difference() {
+    union() {
+      front_length = first_hook_offset + (number_of_hooks - 1) * hook_distance;
+      translate([0, -front_length, 0]) cube([thickness, front_length, width]);
+      for (i = [0:(number_of_hooks-1)]) {
+        each_hook(i);
+      }
+    }
+    translate([-1, -wall_hole_offset, width/2]) rotate([0, 90, 0]) cylinder(d=wall_hole_d, h=thickness+2);
+    translate([thickness/2+.1, -wall_hole_offset, width/2]) rotate([0, 90, 0]) cylinder(d1=wall_hole_d, d2=wall_hole_d*2, h=thickness/2);
+    
+  }
+}
+
+//door_hook();
+wall_hook();
