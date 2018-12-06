@@ -15,7 +15,7 @@ tft_v_screen_size = (1.3 - 2 * 0.11) * inch;
 tft_screen_h_left_spacing = 0.3 * inch;
 tft_screen_v_top_spacing = (tft_v_size - tft_v_screen_size) / 2;
 
-tft_to_top_offset = 1;
+tft_to_top_offset = 0.5;
 
 tft_depth = 1.25 * inch;
 
@@ -85,31 +85,27 @@ module bottom() {
                 // To hold the trellis up
                 size_w = trellis_left + border;
                 translate([0, trellis_left + trellis + trellis_bottom_offset - border, 0]) cube([size_w, border + tollerance, panel_d - trellis_top_space]);
-                translate([0, trellis_left + trellis + trellis_bottom_offset - border, 0]) cube([size_w - border - tollerance, border + tollerance, panel_d]);
 
                 translate([panel_w - size_w, trellis_left + trellis + trellis_bottom_offset - border, 0]) cube([size_w, border + tollerance, panel_d - trellis_top_space]);
-                translate([panel_w - size_w + border + tollerance, trellis_left + trellis + trellis_bottom_offset - border, 0]) cube([size_w - border - tollerance, border + tollerance, panel_d]);
 
-                translate([0, trellis_left + trellis_bottom_offset, 0]) cube([size_w, border, panel_d - trellis_top_space]);
-                translate([0, trellis_left + trellis_bottom_offset, 0]) cube([size_w - border - tollerance, border, panel_d]);
+                translate([0, trellis_left + trellis_bottom_offset - screw_distance, 0]) cube([size_w, border + screw_distance, panel_d - trellis_top_space]);
                 
-                translate([panel_w - size_w, trellis_left + trellis_bottom_offset, 0]) cube([size_w, border, panel_d - trellis_top_space]);
-                translate([panel_w - size_w + border + tollerance, trellis_left + trellis_bottom_offset, 0]) cube([size_w - border - tollerance, border, panel_d]);
+                translate([panel_w - size_w, trellis_left + trellis_bottom_offset - screw_distance, 0]) cube([size_w, border + screw_distance, panel_d - trellis_top_space]);
 
                 translate([0, trellis_left + trellis + trellis_bottom_offset + tollerance, 0]) cube([size_w, border, panel_d - trellis_top_space + border]);
                 translate([panel_w - size_w, trellis_left + trellis + trellis_bottom_offset + tollerance, 0]) cube([size_w, border, panel_d - trellis_top_space + border]);
                 
                 // To screw the tft
                 difference() {
+                    d = screw_d + screw_distance * 2;
                     screw_x = trellis_left + tft_left_hole_center_offset;
-                    screw_y = trellis + trellis_bottom + (tft_v_size - tft_v_hole_space) / 2;
+                    screw_y = trellis + trellis_bottom + d/2;
                     union() {
-                        d = screw_d + screw_distance * 2;
                         h = panel_d - border - tft_to_top_offset;
                         translate([screw_x, screw_y, 0]) cylinder(d=d, h=h);
                         translate([screw_x, screw_y + tft_v_hole_space, 0]) cylinder(d=d, h=h);
-                        translate([0, screw_y-d/4, 0]) cube([screw_x, d/2,h]);
-                        translate([0, screw_y-d/4+tft_v_hole_space, 0]) cube([screw_x, d/2,h]);
+                        translate([0, screw_y-d/2, 0]) cube([screw_x, d,h]);
+                        translate([0, screw_y-d/2+tft_v_hole_space, 0]) cube([screw_x, d,h]);
                     }
                     
                     union() {
