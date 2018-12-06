@@ -22,26 +22,23 @@ round_radius = 4;
 output_raise = 4;
 
 // "input" side
-
-rotate([0, -90, 0])
 difference() {
     bracket();
     translate([0, 0, h/2]) rotate([0, 90, 0]) roundedBox([h, slot_w, thickness+2], radius=round_radius, sidesonly=true);
 }
 
 // "output" side
-translate([-h-2*thickness, 0, 0])
-rotate([0, -90, 0])
+translate([-h, 0, 0])
 union() {
     difference() {
         bracket();
         translate([0, 0, -h/2]) rotate([0, 90, 0]) cube([h, slot_w, thickness+2], center=true);
     }
-    color("black") translate([output_raise, 0, -h/4]) cube([thickness, slot_w, h/2], center=true);
-    translate([output_raise/2, 0, thickness/2]) cube([output_raise+thickness, slot_w, thickness], center=true);
+    color("black") translate([-output_raise, 0, -h/4]) cube([thickness, slot_w, h/2], center=true);
+    translate([-output_raise/2, 0, thickness/2]) cube([output_raise+thickness, slot_w, thickness], center=true);
 
-    translate([output_raise/2, -slot_w/2-thickness/2, -h/4+thickness/2]) cube([output_raise+thickness, thickness, h/2+thickness], center=true);
-    translate([output_raise/2, slot_w/2+thickness/2, -h/4+thickness/2]) cube([output_raise+thickness, thickness, h/2+thickness], center=true);
+    translate([-output_raise/2, -slot_w/2-thickness/2, -h/4+thickness/2]) cube([output_raise+thickness, thickness, h/2+thickness], center=true);
+    translate([-output_raise/2, slot_w/2+thickness/2, -h/4+thickness/2]) cube([output_raise+thickness, thickness, h/2+thickness], center=true);
 }
 
 module bracket() {
