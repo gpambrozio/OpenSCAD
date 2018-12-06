@@ -15,6 +15,8 @@ tft_v_screen_size = (1.3 - 2 * 0.11) * inch;
 tft_screen_h_left_spacing = 0.3 * inch;
 tft_screen_v_top_spacing = (tft_v_size - tft_v_screen_size) / 2;
 
+tft_to_top_offset = 1;
+
 tft_depth = 1.25 * inch;
 
 arduino_top_margin = 1 / 8 * inch;
@@ -103,8 +105,11 @@ module bottom() {
                     screw_y = trellis + trellis_bottom + (tft_v_size - tft_v_hole_space) / 2;
                     union() {
                         d = screw_d + screw_distance * 2;
-                        translate([screw_x, screw_y, 0]) cylinder(d=d, h=panel_d - border);
-                        translate([screw_x, screw_y + tft_v_hole_space, 0]) cylinder(d=d, h=panel_d - border);
+                        h = panel_d - border - tft_to_top_offset;
+                        translate([screw_x, screw_y, 0]) cylinder(d=d, h=h);
+                        translate([screw_x, screw_y + tft_v_hole_space, 0]) cylinder(d=d, h=h);
+                        translate([0, screw_y-d/4, 0]) cube([screw_x, d/2,h]);
+                        translate([0, screw_y-d/4+tft_v_hole_space, 0]) cube([screw_x, d/2,h]);
                     }
                     
                     union() {
