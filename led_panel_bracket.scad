@@ -5,34 +5,34 @@ use <MCAD/boxes.scad>;
 
 h = 24;
 
-panel_h = 90.5;
-panel_d = 14;
-thickness = 2;
+panel_h = 96.5;
+panel_d = 15;
+thickness = 2.4;
 
-screw_distance = 70;
+screw_distance = 76;
 screw_d = 3.3;
 holes_diam_external = 15;
 holes_diam_internal = 9;
 sucker_diameter = 44;
 
-slot_w = 60;
+slot_w = 64;
 
 round_radius = 4;
 
-
-// "input" side
+/*
+// "output" side
 translate([-h, 0, 0])
 difference() {
     bracket();
     translate([0, 0, h/2]) rotate([0, 90, 0]) roundedBox([h, slot_w, thickness+2], radius=round_radius, sidesonly=true);
 }
+*/
 
+output_raise = 5;
+output_raise_w = h - 5;
+reinforcement_size = 4;
 
-output_raise = 4;
-output_raise_w = h - 4;
-reinforcement_size = 5;
-
-// "output" side
+// "input" side
 union() {
     difference() {
         bracket();
