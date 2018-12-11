@@ -15,7 +15,7 @@ tft_v_screen_size = (1.3 - 2 * 0.11) * inch;
 tft_screen_h_left_spacing = 0.3 * inch;
 tft_screen_v_top_spacing = (tft_v_size - tft_v_screen_size) / 2;
 
-tft_to_top_offset = 0.5;
+tft_to_top_offset = 2;
 
 tft_depth = 1.25 * inch;
 
@@ -50,7 +50,7 @@ tft_left_hole_center_offset = (button_size + button_space) / 2;
 trellis_left = (panel_w - trellis) / 2;
 trellis_bottom = trellis_left + trellis_bottom_offset;
 
-arduino_bottom_from_tft_bottom = 1 * inch;
+arduino_bottom_from_tft_bottom = 1 * inch + 1;
 arduino_left_from_tft_left = 13 / 16 * inch;
 arduino_base_w = 3 / 8 * inch;
 arduino_base_h = 1 * inch;
