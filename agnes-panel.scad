@@ -14,8 +14,9 @@ tft_h_screen_size = 1.13 * inch;
 tft_v_screen_size = (1.3 - 2 * 0.11) * inch;
 tft_screen_h_left_spacing = 0.3 * inch;
 tft_screen_v_top_spacing = (tft_v_size - tft_v_screen_size) / 2;
+tft_housing_d = -0.8;
 
-tft_to_top_offset = 2;
+tft_to_top_offset = 2.5;
 
 tft_depth = 1.25 * inch;
 
@@ -29,7 +30,7 @@ button_space = 4 - 2 * tollerance;
 
 trellis = (button_size + button_space) * 4;
 trellis_bottom_offset = screw_d + screw_distance + tollerance;
-trellis_top_space = 0.25 * inch;
+trellis_top_space = 0.23 * inch;
 
 border = 2;
 
@@ -42,7 +43,7 @@ usb_hole_h = 3 / 8 * inch;
 usb_hole_d = 1 * inch;
 usb_hole_from_tft_left = 1 * inch;
 
-echo(panel_h);
+echo(panel_h, panel_w, panel_d);
 
 // The center of the tft hole should be aligned with the center of the first button
 tft_left_hole_center_offset = (button_size + button_space) / 2;
@@ -50,7 +51,6 @@ tft_left_hole_center_offset = (button_size + button_space) / 2;
 trellis_left = (panel_w - trellis) / 2;
 trellis_bottom = trellis_left + trellis_bottom_offset;
 
-arduino_bottom_from_tft_bottom = 1 * inch + 1;
 arduino_left_from_tft_left = 13 / 16 * inch;
 arduino_base_w = 3 / 8 * inch;
 arduino_base_h = 1 * inch;
@@ -114,9 +114,6 @@ module bottom() {
                         translate([screw_x, screw_y + tft_v_hole_space, border]) cylinder(d=d, h=panel_d);
                     }
                 }
-                
-                // arduino base
-                translate([trellis_left + tft_left_hole_center_offset + arduino_left_from_tft_left - (tft_h_size - tft_h_hole_space) / 2, trellis + trellis_bottom + tft_v_size / 2 - arduino_base_h / 2, 0]) cube([arduino_base_w, arduino_base_h, panel_d - border - arduino_bottom_from_tft_bottom]);
             }
             
             // corner screw holes
@@ -131,7 +128,7 @@ module bottom() {
             }
 
             // USB hole
-            translate([trellis_left + tft_left_hole_center_offset + usb_hole_from_tft_left - (tft_h_size - tft_h_hole_space) / 2, panel_h - 1, panel_d - usb_hole_d]) rotate([90, 0, 0]) cube([usb_hole_w, usb_hole_h, border + 2], center = true);
+            translate([trellis_left + tft_left_hole_center_offset + usb_hole_from_tft_left - (tft_h_size - tft_h_hole_space) / 2, panel_h - 1, panel_d - usb_hole_d-2]) rotate([90, 0, 0]) cube([usb_hole_w, usb_hole_h, border + 2], center = true);
             
         }
         translate([panel_w/2, panel_h/2, panel_d/2+round_r/2]) roundedBox([panel_w, panel_h, panel_d + round_r], radius = round_r);
@@ -158,7 +155,7 @@ module top() {
             translate([tft_left - tollerance, tft_bottom - tollerance, -1]) cube([tft_h_screen_size + 2 * tollerance, tft_v_screen_size + 2 * tollerance, border + 2]);
 
             // TFT housing
-            translate([tft_left - tft_screen_h_left_spacing - tollerance, tft_bottom - 0.11 * inch - tollerance, -1]) cube([tft_h_screen_size + tft_screen_h_left_spacing + 3 + 2 * tollerance, tft_v_screen_size + 0.22 * inch + 2 * tollerance, border]);
+            translate([tft_left - tft_screen_h_left_spacing - tollerance, tft_bottom - 0.11 * inch - tollerance, tft_housing_d]) cube([tft_h_screen_size + tft_screen_h_left_spacing + 3 + 2 * tollerance, tft_v_screen_size + 0.22 * inch + 2 * tollerance, border]);
             
             // Screws
             // Bottom
