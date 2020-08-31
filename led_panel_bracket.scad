@@ -19,8 +19,9 @@ slot_w = 64;
 
 round_radius = 4;
 
-/*
+
 // "output" side
+/*
 translate([-h, 0, 0])
 difference() {
     bracket();
