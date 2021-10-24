@@ -1,21 +1,21 @@
 $fa=0.5; // default minimum facet angle
 $fs=0.5; // default minimum facet size
 
-width = 10;
+width = 8;
 
-support_d = 36;
-support_extension = 10;
-thickness = 3.4;
+support_d = 11.1;
+support_extension = 14;
+thickness = 4.4;
 
-support_angle = 1;
-support_bump_distance_from_edge = 31;
+support_angle = 5;
+support_bump_distance_from_edge = 27;
 support_bump_size = 0;
 support_bump_distance = support_bump_distance_from_edge - support_d / 2 + support_bump_size;
 support_height = support_bump_distance + support_bump_size;
 
-hook_d = 19;
+hook_d = 20;
 hook_extension = 10;
-height = 50;
+height = 35;
 
 difference() {
     cylinder(d = support_d + thickness * 2, h = width);
