@@ -5,9 +5,9 @@ width = 8;
 
 support_d = 11.1;
 support_extension = 14;
-thickness = 4.4;
+thickness = 5.2;
 
-support_angle = 5;
+support_angle = 6;
 support_bump_distance_from_edge = 27;
 support_bump_size = 0;
 support_bump_distance = support_bump_distance_from_edge - support_d / 2 + support_bump_size;

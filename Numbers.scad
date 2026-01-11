@@ -8,7 +8,7 @@ height = 12;
 pin_height = 12;
 pin_depth = 10;
 
-number("/Users/gustavoambrozio/Downloads/poppins_extralight_wayne/6.svg", [[0, 58, 0], [0, -58.5, 0]]);
+number("abril_fatface/7.svg", [[0, 50, 0], [12, -40, 0]]);
 
 module number(file, offsets) {
     union() {
