@@ -2,7 +2,7 @@
 // A disc-shaped bead with rounded edges and threading hole
 
 $fa = 1;
-$fs = 0.4;
+$fs = 0.2;
 
 // Parameters
 outer_diameter = 15;    // Largest diameter at the edge
