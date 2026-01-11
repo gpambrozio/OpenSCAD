@@ -8,6 +8,8 @@ This is a collection of OpenSCAD 3D models for practical objects (hooks, bracket
 
 ## Commands
 
+This computer has the latest nightly build of OpenSCAD. For all command line options look at [these docs](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_OpenSCAD_in_a_command_line_environment)
+
 ### Preview/Render in OpenSCAD GUI
 ```bash
 open -a OpenSCAD filename.scad
@@ -21,6 +23,19 @@ open -a OpenSCAD filename.scad
 ### Export with custom parameters
 ```bash
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o output.stl -D 'width=10' -D 'height=20' input.scad
+```
+
+### Export as an image
+
+```bash
+# Front view (X-axis aligned)
+OpenSCAD -o design_front.png --render --imgsize=1200,1200 --viewall --autocenter --camera=80,0,0,60,0,0,120 design.scad
+
+# Side view (Y-axis aligned)
+OpenSCAD -o design_side.png --render --imgsize=1200,1200 --viewall --autocenter --camera=0,80,0,60,0,90,120 design.scad
+
+# Top view (Z-axis aligned)
+OpenSCAD -o design_top.png --render --imgsize=1200,1200 --viewall --autocenter --camera=0,0,80,0,0,0,120 design.scad
 ```
 
 ## Available Libraries
