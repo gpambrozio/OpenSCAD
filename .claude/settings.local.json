@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
-      "Bash(mdfind:*)"
+      "Bash(mdfind:*)",
+      "Bash(/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD:*)",
+      "Bash(fc-scan:*)",
+      "Bash(fc-cache:*)",
+      "Bash(fc-list:*)"
     ]
   }
 }
