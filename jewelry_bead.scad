@@ -11,14 +11,18 @@ height = 5;             // Total height
 hole_diameter = 1.2;    // Threading hole diameter
 
 // Letter parameters
-letter = "L";
+letters = "L";          // String of letters to create beads for
 letter_height = 8;      // Font size
 letter_thickness = 0.1; // Extrusion thickness
 font_file = "Bagel Fat One:style=Regular";
 
-// Calculated radii
+// Layout parameters
+bead_spacing = 2;       // Space between beads
+
+// Calculated values
 outer_radius = outer_diameter / 2;   // 7.5mm
 flat_radius = flat_diameter / 2;     // 5mm
+bead_pitch = outer_diameter + bead_spacing;  // Distance between bead centers
 
 module bead_profile() {
     // Create the 2D profile for rotate_extrude
@@ -36,7 +40,7 @@ module bead_profile() {
     }
 }
 
-module bead() {
+module bead_body() {
     difference() {
         // Main bead body
         rotate_extrude(angle = 360)
@@ -48,28 +52,39 @@ module bead() {
     }
 }
 
-module letter_top() {
+module letter_top(char) {
     // Letter centered on top of bead, top surface flush with bead top
     translate([0, 0, height/2 - letter_thickness])
         linear_extrude(height = letter_thickness + 0.001)
-            text(letter, size = letter_height, font = font_file, halign = "center", valign = "center");
+            text(char, size = letter_height, font = font_file, halign = "center", valign = "center");
 }
 
-module letter_bottom() {
+module letter_bottom(char) {
     // Letter centered on bottom of bead, bottom surface flush with bead bottom
     // Mirrored in Y so it reads correctly when bead is rotated around hole axis (X)
     translate([0, 0, -height/2 - 0.001])
         mirror([0, 1, 0])
             linear_extrude(height = letter_thickness + 0.001)
-                text(letter, size = letter_height, font = font_file, halign = "center", valign = "center");
+                text(char, size = letter_height, font = font_file, halign = "center", valign = "center");
 }
 
-// Render bead in white
+module single_bead_body() {
+    bead_body();
+}
+
+module single_bead_letters(char) {
+    letter_top(char);
+    letter_bottom(char);
+}
+
+// Render all bead bodies in white
 color("white")
-    bead();
+    for (i = [0 : len(letters) - 1])
+        translate([i * bead_pitch, 0, 0])
+            single_bead_body();
 
-// Render letters in black
-color("black") {
-    letter_top();
-    letter_bottom();
-}
+// Render all letters in black
+color("black")
+    for (i = [0 : len(letters) - 1])
+        translate([i * bead_pitch, 0, 0])
+            single_bead_letters(letters[i]);
