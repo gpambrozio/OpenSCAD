@@ -25,6 +25,12 @@ open -a OpenSCAD filename.scad
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o output.stl -D 'width=10' -D 'height=20' input.scad
 ```
 
+## Export as 3MF
+
+When exporting to a 3MF use these parameters as well:
+
+-O export-3mf/material-type=color --enable all
+
 ### Export as an image
 
 ```bash
