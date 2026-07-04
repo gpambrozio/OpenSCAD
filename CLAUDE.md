@@ -25,11 +25,23 @@ open -a OpenSCAD filename.scad
 /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o output.stl -D 'width=10' -D 'height=20' input.scad
 ```
 
-## Export as 3MF
+## Export as 3MF (with colors, for Bambu Studio)
 
-When exporting to a 3MF use these parameters as well:
+Export with `material-type=basematerial` (NOT `color` — Bambu Studio 2.5+ mishandles
+per-triangle color data), then run the fixer script to lift colors to the object level:
 
--O export-3mf/material-type=color --enable all
+```bash
+/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o output.3mf -O export-3mf/material-type=basematerial --enable all input.scad
+python3 fix_3mf_colors.py output.3mf
+```
+
+Requirements for the .scad file:
+- Each color must be a separate top-level statement (lazy-union makes each one its own 3MF object)
+- Every object must be a single uniform color
+
+`fix_3mf_colors.py` (repo root) rewrites the 3MF so each object references one
+basematerial with no per-triangle properties — the structure slicers import reliably.
+In Bambu Studio, choose "Import as multiple objects" when prompted.
 
 ### Export as an image
 

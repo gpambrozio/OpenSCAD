@@ -19,6 +19,10 @@ font_file = "Bagel Fat One:style=Regular";
 // Layout parameters
 bead_spacing = 2;       // Space between beads
 
+// Colors
+body_color = "white";
+letter_color = "black";
+
 // Calculated values
 outer_radius = outer_diameter / 2;   // 7.5mm
 flat_radius = flat_diameter / 2;     // 5mm
@@ -72,19 +76,23 @@ module single_bead_body() {
     bead_body();
 }
 
-module single_bead_letters(char) {
-    letter_top(char);
-    letter_bottom(char);
-}
+// Three top-level statements so the 3MF export contains three separate
+// objects: bead body, top letters, and bottom letters.
 
-// Render all bead bodies in white
-color("white")
+// Render all bead bodies
+color(body_color)
     for (i = [0 : len(letters) - 1])
         translate([i * bead_pitch, 0, 0])
             single_bead_body();
 
-// Render all letters in black
-color("black")
+// Render all top letters
+color(letter_color)
     for (i = [0 : len(letters) - 1])
         translate([i * bead_pitch, 0, 0])
-            single_bead_letters(letters[i]);
+            letter_top(letters[i]);
+
+// Render all bottom letters
+color(letter_color)
+    for (i = [0 : len(letters) - 1])
+        translate([i * bead_pitch, 0, 0])
+            letter_bottom(letters[i]);
